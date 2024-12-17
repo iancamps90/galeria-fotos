@@ -15,7 +15,11 @@ $result = $conn->query($sql);
                 <img src="<?php echo $foto['ruta']; ?>" alt="<?php echo $foto['nombre']; ?>">
                 <p><?php echo $foto['nombre']; ?></p>
                 <p><?php echo $foto['descripcion']; ?></p>
+                <a href="edit.php?id=<?php echo $foto['id']; ?>">Editar</a> |
+                <a href="delete.php?id=<?php echo $foto['id']; ?>" onclick="return confirm('¿Estás seguro de que quieres eliminar esta foto?');">Eliminar</a>
             </div>
+
+
         <?php endwhile; ?>
     <?php else: ?>
         <p>No hay fotos subidas aún.</p>
