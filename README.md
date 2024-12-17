@@ -6,7 +6,7 @@ Este proyecto es una galería de fotos simple que permite a los usuarios ver, su
 
 - Visualización de fotos almacenadas en la base de datos.
 - Subida de nuevas fotos.
-- Edición de fotos.
+- Edición de fotos (próximamente).
 - Eliminación de fotos.
 - Usabilidad con Bootstrap para una interfaz amigable y responsiva.
 
@@ -38,6 +38,7 @@ galeria_fotos/
 └── README.md
 
 
+
 ## Requisitos
 
 - XAMPP o cualquier servidor local que soporte PHP y MySQL.
@@ -59,42 +60,45 @@ La base de datos debe tener una tabla llamada `fotos` con los siguientes campos:
 ```sql
 CREATE TABLE fotos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
     descripcion TEXT,
-    foto VARCHAR(255) NOT NULL
+    ruta VARCHAR(255) NOT NULL
+    fecha_subida timestamp current_timestamp
 );
 
+Solucionando el Problema de "No hay fotos"
 
-### **2. Solucionando el Problema de "No hay fotos"**
+Si al cargar la página de inicio no aparecen fotos, puede ser por varios motivos. Aquí algunos pasos para solucionarlo:
 
-Parece que el problema es que no hay fotos en la base de datos, o bien la consulta no está obteniendo resultados. Vamos a comprobar algunos puntos:
+    Verificar la base de datos:
+        Asegúrate de que la tabla fotos tiene imágenes cargadas. Si no es así, puedes añadir algunas a través del formulario de carga.
 
-#### **Pasos para solucionar "No hay fotos"**:
+    Comprobar la consulta SQL:
+        En el archivo index.php, verifica que la consulta SQL para obtener las fotos esté correcta. También asegúrate de que la conexión en db.php sea válida y sin errores.
 
-1. **Verificar la base de datos**:
-   - Asegúrate de que en la base de datos (en la tabla `fotos`) haya fotos cargadas. Si no, debes agregar algunas fotos en la base de datos o a través del formulario de carga.
-   
-2. **Comprobar que la consulta SQL está funcionando correctamente**:
-   En el archivo **`index.php`**, revisa si la consulta SQL está bien escrita y si está obteniendo datos de la tabla correctamente.
+Mejoras y Funcionalidades Recientes
+1. Menú de Navegación
 
-   Asegúrate de que el archivo `db.php` tiene la conexión correcta y que no hay errores de conexión. Aquí te dejo un ejemplo de cómo debería estar:
+Se ha añadido un menú de navegación para facilitar el acceso entre las diferentes páginas del proyecto. Este menú incluye enlaces a:
 
-   ```php
-   <?php
-   include('db/db.php'); // Incluir la conexión a la base de datos
+    Inicio (index.php)
+    Subir Foto (upload.php)
+    Editar Foto (edit.php) — próximamente funcional.
+    Eliminar Foto (delete.php) — próximamente funcional.
 
-   // Obtener las fotos desde la base de datos
-   $conn = getDB(); // Usamos la función de conexión de db.php
-   $sql = "SELECT * FROM fotos";
-   $result = $conn->query($sql);
+El menú se encuentra en el archivo includes/header.php.
+2. Subida de Fotos
 
-   if ($result->num_rows > 0) {
-       // Si hay fotos, mostrar cada una
-       while ($row = $result->fetch_assoc()) {
-           // Aquí va el código para mostrar las fotos
-       }
-   } else {
-       echo "<h3>No hay fotos</h3>";
-   }
-   ?>
+El archivo upload.php ahora contiene un formulario para permitir a los usuarios subir fotos. El formulario incluye campos para ingresar un título y descripción, y permite seleccionar la imagen desde el dispositivo. Las fotos se guardan en la carpeta uploads/, y sus datos (título, descripción y nombre del archivo) se almacenan en la base de datos.
+3. Eliminación de Fotos
 
+En el archivo delete.php se ha añadido la funcionalidad de eliminar fotos. Los usuarios pueden eliminar imágenes directamente desde la galería. La eliminación incluye tanto la base de datos como la eliminación del archivo en la carpeta uploads/.
+4. Edición de Fotos (Próximamente)
+
+El archivo edit.php está preparado para la edición de fotos, aunque aún no está funcional. Próximamente se permitirá a los usuarios editar el título y la descripción de las fotos subidas.
+5. Diseño Responsivo Mejorado
+
+Gracias a la integración de Bootstrap 5, el diseño del proyecto ahora es completamente responsivo. Esto garantiza que la página se vea bien en dispositivos móviles y en pantallas de escritorio.
+6. Centralización de Configuración
+
+Se ha añadido el archivo config.php, que centraliza la configuración del sistema, como la conexión a la base de datos. Esto facilita la gestión de configuraciones y hace que el proyecto sea más fácil de mantener.

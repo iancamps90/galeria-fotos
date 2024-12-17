@@ -4,7 +4,7 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root'); // 'root' es el usuario por defecto en XAMPP
 define('DB_PASSWORD', ''); // Sin contraseña en XAMPP
-define('DB_DATABASE', 'galeria'); // Nombre de la base de datos
+define('DB_DATABASE', 'galeria_fotos'); // Nombre de la base de datos
 
 // Conectar a la base de datos
 function getDB()

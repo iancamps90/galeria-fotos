@@ -34,6 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+
+<?php include('includes/header.php'); ?>
+
+
 <h1>Editar Foto</h1>
 <form method="POST">
     <label>Nombre:</label>
@@ -43,3 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <button type="submit">Guardar Cambios</button>
 </form>
 <a href="index.php">Volver a la galería</a>
+
+
+
+
+<?php include('includes/footer.php'); ?>
